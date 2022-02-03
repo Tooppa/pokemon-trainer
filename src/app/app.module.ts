@@ -4,7 +4,7 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { TrainerAPIService } from './services/trainer-api.service';
+import { TrainerAPIService } from './services/trainer/trainer-api.service';
 
 @NgModule({
   declarations: [
