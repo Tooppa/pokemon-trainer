@@ -2,15 +2,20 @@
   <span>Welcome</span>
 </div>
 
-<div class="content" role="main">
+<div class="container">
+  <div class="content" role="main">
 
-  <div>
-    <span>Welcome to the {{ title }}</span>
+    <h1>Welcome to the {{ title }}</h1>
+
+    <form>
+      <!--Angular has a special type of form. in the future update this to it-->
+      <input type="text" name="trainer-name" placeholder="Input your trainer name">
+      <button type="submit">Log in</button>
+    </form>
+
   </div>
-  <form><!--Angular has a special type of form. in the future update this to it-->
-    <input type="text" name="trainer-name" placeholder="Input your trainer name">
-    <button type="submit">Log in</button>
-  </form>
+
+  <footer></footer>
 
 </div>
 
