@@ -5,6 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { TrainerAPIService } from './services/trainer/trainer-api.service';
+import { SessionStorageService } from './services/session/session-storage.service';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,7 @@ import { TrainerAPIService } from './services/trainer/trainer-api.service';
     AppRoutingModule,
     HttpClientModule
   ],
-  providers: [TrainerAPIService],
+  providers: [TrainerAPIService, SessionStorageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
