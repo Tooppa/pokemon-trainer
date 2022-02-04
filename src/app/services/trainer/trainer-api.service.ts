@@ -17,18 +17,18 @@ export class TrainerAPIService {
 
   getAllTrainers(): Observable<Trainer[]> {
     // TODO: Figure out if we need shareReplay here
-    return this.http.get<Trainer[]>(environment.baseUrl);
+    return this.http.get<Trainer[]>(environment.trainersBaseUrl);
   }
 
   getTrainer(username: string): Observable<Trainer> {
     return this.http.get<Trainer>(
-      `${environment.baseUrl}?username=${username}`
+      `${environment.trainersBaseUrl}?username=${username}`
     );
   }
 
   postTrainer(username: string): Observable<Trainer> {
     return this.http.post<Trainer>(
-      environment.baseUrl,
+      environment.trainersBaseUrl,
       {
         username: username,
         pokemon: [],
@@ -44,7 +44,7 @@ export class TrainerAPIService {
 
   addNewPokemon(username: string, newPokemon: string[]): Observable<Trainer> {
     return this.http.patch<Trainer>(
-      `${environment.baseUrl}/${username}`,
+      `${environment.trainersBaseUrl}/${username}`,
       JSON.stringify({ newPokemon }),
       {
         headers: {
