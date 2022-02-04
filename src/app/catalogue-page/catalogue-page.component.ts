@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./catalogue-page.component.scss']
 })
 export class CataloguePageComponent implements OnInit {
-
+  pokemons: Array<object> = [{},{}];
   constructor() { }
 
   ngOnInit(): void {
