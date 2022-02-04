@@ -6,6 +6,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { TrainerAPIService } from './services/trainer/trainer-api.service';
 import { SessionStorageService } from './services/session/session-storage.service';
+import { PokemonAPIService } from './services/pokemon/pokemon-api.service';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,7 @@ import { SessionStorageService } from './services/session/session-storage.servic
     AppRoutingModule,
     HttpClientModule
   ],
-  providers: [TrainerAPIService, SessionStorageService],
+  providers: [PokemonAPIService, TrainerAPIService, SessionStorageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
