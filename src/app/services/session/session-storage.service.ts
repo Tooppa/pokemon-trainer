@@ -11,8 +11,15 @@ export class SessionStorageService {
   /**
    * Overrides currently saved session (if any)
    */
-  public saveSession(values: Object | string): void {
+  public saveSession(values: Object[] | string): void {
     sessionStorage.setItem(this.sessionStorageKey, JSON.stringify(values));
+  }
+
+  public appendSession<T>(values: Object[] | string): void {
+    sessionStorage.setItem(
+      this.sessionStorageKey,
+      JSON.stringify([...this.loadSession<T>(), ...values])
+    );
   }
 
   public loadSession<T>(): T[] {
