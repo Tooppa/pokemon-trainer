@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
 import { Pokemon } from 'src/app/models/pokemon.model';
 import { PokemonState } from 'src/app/state/pokemon.state';
+import { environment } from 'src/environments/environment';
 import { SessionStorageService } from '../session/session-storage.service';
 import { PokemonAPIService } from './pokemon-api.service';
 
@@ -21,7 +22,8 @@ export class PokemonFacade {
    */
   public getPokemon(offset: number, amount: number): void {
     // Check if there are enough pokemon cached
-    const sessionPokemon: Pokemon[] = this.sessionStorage.loadSession<Pokemon>();
+    const sessionPokemon: Pokemon[] =
+      this.sessionStorage.loadSession<Pokemon>();
     if (sessionPokemon.length >= amount) {
       this.pokemonState.setPokemon(sessionPokemon.splice(0, amount));
     } else {
@@ -33,13 +35,17 @@ export class PokemonFacade {
           map((res: any) => {
             const createdPokemon: Pokemon[] = [];
             for (const i of res.results) {
+              const id = Number(
+                i.url.match(i.url.match(/\/pokemon\/(\d+)\//)[1])
+              );
               createdPokemon.push(
                 new Pokemon(
                   i.name,
-                  Number(i.url.match(i.url.match(/\/pokemon\/(\d+)\//)[1])),
-                  i.url
+                  id,
+                  i.url,
+                  `${environment.pokemonImgBaseUrl}${id}.png`
                 )
-              );  
+              );
             }
             return createdPokemon;
           })
