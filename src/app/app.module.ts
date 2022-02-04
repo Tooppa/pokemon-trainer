@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { TrainerPageComponent } from './trainer-page/trainer-page.component';
 import { CataloguePageComponent } from './catalogue-page/catalogue-page.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,9 @@ import { CataloguePageComponent } from './catalogue-page/catalogue-page.componen
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
