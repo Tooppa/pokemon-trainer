@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Pokemon } from '../models/pokemon.model';
 
 @Component({
   selector: 'app-catalogue-page',
@@ -6,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./catalogue-page.component.scss']
 })
 export class CataloguePageComponent implements OnInit {
-  pokemons: Array<object> = [{},{}];
+  pokemons: Array<Pokemon> = [];
   constructor() { }
 
   ngOnInit(): void {
