@@ -8,12 +8,16 @@ export class LocalStorageService {
   constructor() {}
 
   /**
-   * Overrides currently saved session (if any)
+   * Saves and overrides currenly saved localStorage
    */
   public save(values: Object | string): void {
     localStorage.setItem(this.localStorageKey, JSON.stringify(values));
   }
 
+  /**
+   * Loads data from localStorage.
+   * @returns Objects of specified type
+   */
   public load<T>(): T | null {
     const item = localStorage.getItem(this.localStorageKey);
     if (item) {
@@ -22,6 +26,9 @@ export class LocalStorageService {
     return null;
   }
 
+  /**
+   * Checks if there is current storage set
+   */
   get hasStored(): boolean {
     return localStorage.getItem(this.localStorageKey) ? true : false;
   }

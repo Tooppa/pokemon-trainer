@@ -34,6 +34,9 @@ export class TrainerFacade implements OnInit {
     });
   }
 
+  /**
+   * Posts trainer to trainer database. Also saves it to localStorage
+   */
   public postTrainer(username: string): void {
     this.trainerApi.postTrainer(username).subscribe((trainer: Trainer) => {
       this.trainerState.setTrainer(trainer);
@@ -41,6 +44,9 @@ export class TrainerFacade implements OnInit {
     });
   }
 
+  /**
+   * Adds new pokemon to user
+   */
   public addNewPokemon(username: string, newPokemon: string[]) {
     this.trainerApi
       .addNewPokemon(username, newPokemon)
@@ -49,14 +55,16 @@ export class TrainerFacade implements OnInit {
       });
   }
 
-  get localTrainer(): Trainer | null {
-    return this.localStorage.load<Trainer>();
-  }
-
+  /**
+   * Gets current trainers from the trainer state
+   */
   public trainers$(): Observable<Trainer[]> {
     return this.trainerState.getTrainers$();
   }
 
+  /**
+   * Gets trainer with usename from the trainer state
+   */
   public trainer$(username: string): Trainer | undefined {
     return this.trainerState.getTrainer(username);
   }

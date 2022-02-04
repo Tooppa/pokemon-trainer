@@ -15,17 +15,25 @@ export class TrainerAPIService {
     }
   }
 
+  /**
+   * Fetches all trainers in the Trainer API
+   */
   getAllTrainers(): Observable<Trainer[]> {
-    // TODO: Figure out if we need shareReplay here
     return this.http.get<Trainer[]>(environment.trainersBaseUrl);
   }
 
+  /**
+   * Gets a trainer with given username
+   */
   getTrainer(username: string): Observable<Trainer> {
     return this.http.get<Trainer>(
       `${environment.trainersBaseUrl}?username=${username}`
     );
   }
 
+  /**
+   * Post user with given username to database. This is useful when creating new trainer.
+   */
   postTrainer(username: string): Observable<Trainer> {
     return this.http.post<Trainer>(
       environment.trainersBaseUrl,
@@ -42,6 +50,10 @@ export class TrainerAPIService {
     );
   }
 
+  /**
+   * Adds list of pokemon to user
+   * @param newPokemon pokemon to add
+   */
   addNewPokemon(username: string, newPokemon: string[]): Observable<Trainer> {
     return this.http.patch<Trainer>(
       `${environment.trainersBaseUrl}/${username}`,

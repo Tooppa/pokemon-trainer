@@ -9,12 +9,15 @@ export class SessionStorageService {
   constructor() {}
 
   /**
-   * Overrides currently saved session (if any)
+   * Saves and overrides currently saved session
    */
   public saveSession(values: Object[] | string): void {
     sessionStorage.setItem(this.sessionStorageKey, JSON.stringify(values));
   }
 
+  /**
+   * Appends data to currently saved session
+   */
   public appendSession<T>(values: Object[] | string): void {
     sessionStorage.setItem(
       this.sessionStorageKey,
@@ -22,6 +25,10 @@ export class SessionStorageService {
     );
   }
 
+  /** 
+   * Loads data from the currently saved session.
+   * @returns Returns an empty array if there is no stored session
+   */
   public loadSession<T>(): T[] {
     const item = sessionStorage.getItem(this.sessionStorageKey);
     if (item) {
@@ -30,6 +37,9 @@ export class SessionStorageService {
     return [];
   }
 
+  /**
+   * Checks if session has been set
+   */
   get hasSessionSet(): boolean {
     return sessionStorage.getItem(this.sessionStorageKey) ? true : false;
   }
