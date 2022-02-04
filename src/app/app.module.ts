@@ -11,13 +11,15 @@ import { LoginPageComponent } from './login-page/login-page.component';
 import { TrainerPageComponent } from './trainer-page/trainer-page.component';
 import { CataloguePageComponent } from './catalogue-page/catalogue-page.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { PokemonViewComponent } from './pokemon-view/pokemon-view.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginPageComponent,
     TrainerPageComponent,
-    CataloguePageComponent
+    CataloguePageComponent,
+    PokemonViewComponent
   ],
   imports: [
     BrowserModule,
