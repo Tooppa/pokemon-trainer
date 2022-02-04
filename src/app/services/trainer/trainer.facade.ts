@@ -18,6 +18,8 @@ export class TrainerFacade implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    // TODO: Investigate if we should do this here
+    // Does this get ran even tho we're not using it?
     this.fetchTrainers();
   }
 
@@ -32,14 +34,14 @@ export class TrainerFacade implements OnInit {
     });
   }
 
-  public postTrainer$(username: string): void {
+  public postTrainer(username: string): void {
     this.trainerApi.postTrainer(username).subscribe((trainer: Trainer) => {
       this.trainerState.setTrainer(trainer);
       this.localStorage.save(trainer);
     });
   }
 
-  public addNewPokemon$(username: string, newPokemon: string[]) {
+  public addNewPokemon(username: string, newPokemon: string[]) {
     this.trainerApi
       .addNewPokemon(username, newPokemon)
       .subscribe((trainer: Trainer) => {
