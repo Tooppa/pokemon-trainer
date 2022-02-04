@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  baseUrl: 'https://noroff-accelerate-api.herokuapp.com/trainers',
+  trainersBaseUrl: 'https://noroff-accelerate-api.herokuapp.com/trainers',
+  pokemonBaseUrl: 'https://pokeapi.co/api/v2/',
   apiKey: process.env.NG_APP_API_KEY,
 };
 
