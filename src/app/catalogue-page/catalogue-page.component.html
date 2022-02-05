@@ -11,3 +11,11 @@
 <div class="catalogue">
     <app-pokemon-view *ngFor="let pokemon of pokemon$ | async" [pokemon]="pokemon"></app-pokemon-view>
 </div>
+<div class="settings">
+    <div class="buttons">
+        <button (click)="turnPage(false)">-</button>
+        <h3>Page:</h3>
+        <h3>{{page}}</h3>
+        <button (click)="turnPage(true)">+</button>
+    </div>
+</div>
