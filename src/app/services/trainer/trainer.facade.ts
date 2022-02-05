@@ -37,10 +37,11 @@ export class TrainerFacade implements OnInit {
   /**
    * Posts trainer to trainer database. Also saves it to localStorage
    */
-  public postTrainer(username: string): void {
+  public postTrainer(username: string, callback: any): void {
     this.trainerApi.postTrainer(username).subscribe((trainer: Trainer) => {
       this.trainerState.setTrainer(trainer);
-      this.localStorage.save(trainer);
+      this.localStorage.save({ username: trainer.username, pokemon: trainer.pokemon});
+      callback();
     });
   }
 

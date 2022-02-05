@@ -12,6 +12,7 @@ import { TrainerPageComponent } from './trainer-page/trainer-page.component';
 import { CataloguePageComponent } from './catalogue-page/catalogue-page.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PokemonViewComponent } from './pokemon-view/pokemon-view.component';
+import { LoginGuard } from './services/guards/login.guard';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,7 @@ import { PokemonViewComponent } from './pokemon-view/pokemon-view.component';
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [PokemonAPIService, TrainerAPIService, SessionStorageService],
+  providers: [PokemonAPIService, TrainerAPIService, SessionStorageService, LoginGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
