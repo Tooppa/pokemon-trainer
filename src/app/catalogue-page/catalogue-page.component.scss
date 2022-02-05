@@ -8,3 +8,16 @@
     align-items: center;
     justify-content: center;
 }
+.catalogue{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    border: #1b2845 2px solid;
+    border-radius: 20px;
+    margin-left: 2vw;
+    margin-right: 2vw;
+}
+h1{
+    text-align: center;
+}
