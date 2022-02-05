@@ -18,9 +18,9 @@ export class CataloguePageComponent implements OnInit {
   private items: number = 48;
 
   turnPage(forward: boolean): void {
-    if ((forward && this.page > 0) || (!forward && this.page > 1)) {
+    if ((forward && this.page > 0 && this.page < 24) || (!forward && this.page > 1)) {
       this.page += forward ? 1 : -1;
-      this.pokemonService.getPokemon(this.page, this.items);
+      this.pokemonService.getMorePokemons((this.page-1 )* this.items, this.items);
     }
   }
 
