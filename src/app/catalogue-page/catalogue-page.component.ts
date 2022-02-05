@@ -15,10 +15,11 @@ export class CataloguePageComponent implements OnInit {
     return this.pokemonService.pokemon$();
   }
   page: number = 0;
+  private items: number = 48;
 
 
   ngOnInit(): void {
-    this.pokemonService.getPokemon(0,200);
+    this.pokemonService.getPokemon(0,this.items);
   }
 
 }
