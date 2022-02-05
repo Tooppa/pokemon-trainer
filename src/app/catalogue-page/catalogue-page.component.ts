@@ -12,10 +12,9 @@ export class CataloguePageComponent implements OnInit {
   constructor(private readonly pokemonService: PokemonFacade) { }
 
   get pokemon$(): Observable<Pokemon[]> {
-    console.log(this.pokemonService.pokemon$());
-    
     return this.pokemonService.pokemon$();
   }
+  page: number = 0;
 
 
   ngOnInit(): void {
