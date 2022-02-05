@@ -1,4 +1,4 @@
-:host{
+:host {
     flex-grow: 1;
     display: flex;
     margin: 82px auto 32px;
@@ -7,4 +7,41 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+}
+.catalogue {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    border: #1b2845 2px solid;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    background-color: #e08d79;
+    max-height: 300px;
+    overflow-y: auto;
+    padding: 20px;
+}
+.collection, .headers{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+.collection > * {
+    flex: 1 1 0;
+}
+.additional {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border: #1b2845 2px solid;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    background-color: #faff81;
+    padding: 20px;
+    margin-left: 20px;
+}
+h1,
+h3 {
+    width: 100%;
+    text-align: center;
 }

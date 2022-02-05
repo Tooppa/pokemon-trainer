@@ -8,3 +8,44 @@
     align-items: center;
     justify-content: center;
 }
+.catalogue{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    border: #1b2845 2px solid;
+    border-radius: 20px;
+    margin-left: 2vw;
+    background-color: #E08D79;
+    margin-right: 2vw;
+    padding: 20px;
+}
+.settings{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 90%;
+    padding: 5px;
+}
+.buttons{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-left: auto;
+}
+button{
+    background-color: #FFFFFC;
+    border: #1b2845 2px solid;
+    border-radius: 20px;
+    height: 30px;
+    width: 30px;
+    margin: 10px;
+}
+h1{
+    text-align: center;
+}
+h3{
+    padding: 2px;
+}

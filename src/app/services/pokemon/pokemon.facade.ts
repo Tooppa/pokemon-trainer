@@ -14,7 +14,7 @@ export class PokemonFacade {
     private readonly pokemonApi: PokemonAPIService,
     private readonly pokemonState: PokemonState,
     private readonly sessionStorage: SessionStorageService
-  ) {}
+  ) { }
 
   /**
    *  Used for data fetching. Sets the current state to represent the amount of data requested.
@@ -58,6 +58,41 @@ export class PokemonFacade {
           this.pokemonState.setPokemon([...sessionPokemon, ...pokemon]);
         });
     }
+  }
+
+  public getMorePokemons(offset: number, amount: number): void {
+    // Check if there are enough pokemon cached
+    const sessionPokemon: Pokemon[] =
+      this.sessionStorage.loadSession<Pokemon>();
+
+    this.pokemonApi
+      .fetchPokemon(offset, amount)
+      .pipe(
+        map((res: any) => {
+          const createdPokemon: Pokemon[] = [];
+          for (const i of res.results) {
+            const id = Number(
+              i.url.match(i.url.match(/\/pokemon\/(\d+)\//)[1])
+            );
+            createdPokemon.push(
+              new Pokemon(
+                i.name,
+                id,
+                i.url,
+                `${environment.pokemonImgBaseUrl}${id}.png`
+              )
+            );
+          }
+          return createdPokemon;
+        })
+      )
+      .subscribe((pokemon: Pokemon[]) => {
+        // Append newly requested pokemon to session storage
+        this.sessionStorage.appendSession(pokemon);
+
+        // Set requested amount of pokemon to state
+        this.pokemonState.setPokemon([...pokemon]);
+      });
   }
 
   /**

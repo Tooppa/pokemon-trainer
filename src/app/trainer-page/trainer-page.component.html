@@ -1,1 +1,25 @@
-<p>trainer-page works!</p>
+<h3>Welcome: {{trainer$ | async}} Here you can see your pokemon Collection. Click on a pokemon to view more info.</h3>
+<div class="headers">
+    <h1>Collected Pokemons</h1>
+    <h1>Additional info</h1>
+</div>
+<div class="collection">
+    <div class="catalogue">
+        <app-pokemon-view *ngFor="let pokemon of pokemon$ | async" [pokemon]="pokemon"></app-pokemon-view>
+    </div>
+    <div class="additional">
+        <div>
+            <h3>Name: </h3>
+            <h3>{{pokemon?.name}}</h3>
+        </div>
+        <div>
+            <h3>Height: </h3>
+        </div>
+        <div>
+            <h3>Abilities: </h3>
+        </div>
+        <div>
+            <h3>Types: </h3>
+        </div>
+    </div>
+</div>

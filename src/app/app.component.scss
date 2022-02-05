@@ -9,15 +9,33 @@
     top: 0;
     left: 0;
     right: 0;
-    height: 60px;
+    height: 70px;
     display: flex;
+    flex-direction: row;
     align-items: center;
     background-color: #1976d2;
     color: white;
     font-weight: 600;
 }
 .toolbar > span{
-    padding-left: 20px;
+    padding: 20px;
+}
+.links{
+    margin-left: auto;
+}
+a{
+    padding: 10px;
+    margin-right: 40px;
+    color: white;
+    text-decoration: none;
+    font-size: larger;
+    border-radius: 20px;
+}
+a:hover{
+    text-decoration: underline;
+}
+a:active{
+    color: #1B2845;
 }
 
 .container{
