@@ -8,6 +8,18 @@
         <app-pokemon-view *ngFor="let pokemon of pokemon$ | async" [pokemon]="pokemon"></app-pokemon-view>
     </div>
     <div class="additional">
-        <h3>{{pokemon?.name}}</h3>
+        <div>
+            <h3>Name: </h3>
+            <h3>{{pokemon?.name}}</h3>
+        </div>
+        <div>
+            <h3>Height: </h3>
+        </div>
+        <div>
+            <h3>Abilities: </h3>
+        </div>
+        <div>
+            <h3>Types: </h3>
+        </div>
     </div>
 </div>
