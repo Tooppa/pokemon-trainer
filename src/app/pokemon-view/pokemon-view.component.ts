@@ -13,4 +13,7 @@ export class PokemonViewComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  pokemonCLick(): void {
+    console.log(this.pokemon?.name + ' clicked');
+  }
 }
