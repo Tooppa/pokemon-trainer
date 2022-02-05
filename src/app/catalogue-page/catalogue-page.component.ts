@@ -14,12 +14,19 @@ export class CataloguePageComponent implements OnInit {
   get pokemon$(): Observable<Pokemon[]> {
     return this.pokemonService.pokemon$();
   }
-  page: number = 0;
+  page: number = 1;
   private items: number = 48;
+
+  turnPage(forward: boolean): void {
+    if ((forward && this.page > 0) || (!forward && this.page > 1)) {
+      this.page += forward ? 1 : -1;
+      this.pokemonService.getPokemon(this.page, this.items);
+    }
+  }
 
 
   ngOnInit(): void {
-    this.pokemonService.getPokemon(0,this.items);
+    this.pokemonService.getPokemon(this.page, this.items);
   }
 
 }

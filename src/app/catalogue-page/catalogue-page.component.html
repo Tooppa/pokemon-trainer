@@ -1,10 +1,10 @@
 <div class="settings">
     <h1>Pokemon catalogue</h1>
     <div class="buttons">
-        <button>-</button>
+        <button (click)="turnPage(false)">-</button>
         <h3>Page:</h3>
         <h3>{{page}}</h3>
-        <button>+</button>
+        <button (click)="turnPage(true)">+</button>
     </div>
 </div>
 <div class="catalogue">
