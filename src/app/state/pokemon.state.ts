@@ -7,6 +7,7 @@ import { Pokemon } from '../models/pokemon.model';
 })
 export class PokemonState {
   private readonly pokemon$ = new BehaviorSubject<Pokemon[]>([]);
+  private selectedPokemon: Pokemon | undefined = undefined;
 
   /** Get pokemon objservable */
   getPokemon(): Observable<Pokemon[]> {
@@ -16,5 +17,13 @@ export class PokemonState {
   /** Set pokemon to the state */
   setPokemon(pokemon: Pokemon[]): void {
     this.pokemon$.next(pokemon);
+  }
+
+  setCurrentlySelectedPokemon(pokemon: Pokemon | undefined) {
+    this.selectedPokemon = pokemon;
+  }
+
+  get currentlySelectedPokemon(): Pokemon | undefined {
+    return this.selectedPokemon;
   }
 }

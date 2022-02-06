@@ -10,16 +10,23 @@
     <div class="additional">
         <div>
             <h3>Name: </h3>
-            <h3>{{pokemon?.name}}</h3>
+            <h3>{{currentPokemon?.name}}</h3>
         </div>
         <div>
             <h3>Height: </h3>
+            <h3>{{currentPokemon?.details?.height}} dm</h3>
         </div>
         <div>
             <h3>Abilities: </h3>
+            <ul class="abilities-list">
+                <li *ngFor="let ability of currentPokemon?.details?.abilities"><h4>{{ability.name}}</h4></li>
+            </ul>
         </div>
         <div>
             <h3>Types: </h3>
+            <ul class="abilities-list">
+                <li *ngFor="let type of currentPokemon?.details?.types"><h4>{{type.name}}</h4></li>
+            </ul>
         </div>
     </div>
 </div>
