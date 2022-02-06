@@ -23,8 +23,6 @@ export class TrainerPageComponent implements OnInit {
   }
 
   get currentPokemon(): Pokemon | undefined {
-    console.log(this.pokemonService.currentPokemon);
-    
     return this.pokemonService.currentPokemon;
   }
 
