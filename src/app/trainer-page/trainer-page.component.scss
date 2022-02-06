@@ -40,11 +40,21 @@
     padding: 20px;
     margin-left: 20px;
 }
+.additional > div{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: 1;
+    justify-content: left;
+    padding-left: 10%;
+}
+.additional > div > h3{
+    width: auto;
+    padding-left: 10px;
+}
 .abilities-list {
     list-style: none;
-    text-align: center;
     margin: 0;
-    padding: 0;
+    padding-left: 10px;
 }
 h1,
 h3 {
