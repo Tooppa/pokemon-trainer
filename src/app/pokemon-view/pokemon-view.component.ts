@@ -1,19 +1,20 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Pokemon } from '../models/pokemon.model';
+import { PokemonFacade } from '../services/pokemon/pokemon.facade';
+import { PokemonState } from '../state/pokemon.state';
 
 @Component({
   selector: 'app-pokemon-view',
   templateUrl: './pokemon-view.component.html',
-  styleUrls: ['./pokemon-view.component.scss']
+  styleUrls: ['./pokemon-view.component.scss'],
 })
 export class PokemonViewComponent implements OnInit {
   @Input() pokemon: Pokemon | undefined;
-  constructor() { }
+  constructor(private readonly pokemonFacade: PokemonFacade) {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   pokemonCLick(): void {
-    console.log(this.pokemon?.name + ' clicked');
+    this.pokemonFacade.setCurrentPokemon(this.pokemon);
   }
 }
