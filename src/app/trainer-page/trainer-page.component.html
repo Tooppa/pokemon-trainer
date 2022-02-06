@@ -1,11 +1,12 @@
-<h3>Welcome: {{trainer$ | async}} Here you can see your pokemon Collection. Click on a pokemon to view more info.</h3>
+<h3>Welcome: {{(currentTrainer$ | async)?.username}} Here you can see your pokemon Collection. Click on a pokemon to view more info.</h3>
 <div class="headers">
     <h1>Collected Pokemons</h1>
     <h1>Additional info</h1>
 </div>
 <div class="collection">
     <div class="catalogue">
-        <app-pokemon-view *ngFor="let pokemon of pokemon$ | async" [pokemon]="pokemon"></app-pokemon-view>
+        <div *ngIf="!(currentTrainer$ | async)?.pokemon"><h2>No pokemon collected</h2></div>
+        <app-pokemon-view *ngFor="let pokemon of (currentTrainer$ | async)?.pokemon" [pokemon]="pokemon" (onPokemonClick)="pokemonClick($event)"></app-pokemon-view>
     </div>
     <div class="additional">
         <div>

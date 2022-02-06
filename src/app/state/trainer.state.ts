@@ -1,30 +1,31 @@
 import { Injectable } from "@angular/core";
 import { BehaviorSubject, Observable } from "rxjs";
+import { Pokemon } from "../models/pokemon.model";
 import { Trainer } from "../models/trainer.model";
 
 @Injectable({
   providedIn: 'root',
 })
 export class TrainerState {
-  private readonly trainers$ = new BehaviorSubject<Trainer[]>([]);
+  private readonly trainer$ = new BehaviorSubject<Trainer>(new Trainer);
 
-  /** Get trainers from the state */
-  getTrainer(username: string): Trainer | undefined {
-    return this.trainers$.value.find((x) => x.username === username);
-  }
-
-  /** Set trainers to the state */
-  setTrainers(trainers: Trainer[]): void {
-    this.trainers$.next(trainers);
+  getTrainer$(): Observable<Trainer> {
+    return this.trainer$.asObservable();
   }
 
   /** Set single trainer to the state */
   setTrainer(trainer: Trainer): void {
-    this.trainers$.next([...this.trainers$.value, trainer]);
+    this.trainer$.next(trainer);
   }
 
-  /** Get trainers observable */
-  getTrainers$(): Observable<Trainer[]> {
-    return this.trainers$.asObservable();
+  /**
+   * Adds pokemon to current trainer
+   */
+  addPokemon(pokemon: Pokemon[]): void {
+    this.setTrainer({
+      id: this.trainer$.value.id,
+      username: this.trainer$.value.username,
+      pokemon: [...this.trainer$.value.pokemon, ...pokemon]
+    });
   }
 }
