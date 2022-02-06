@@ -41,8 +41,13 @@ export class TrainerFacade {
   /**
    * Adds new pokemon to user
    */
-  public addNewPokemon(newPokemon: Pokemon) {
+  public addNewPokemon(newPokemon: Pokemon): void {
     const savedTrainer = this.localStorage.load<Trainer>();
+
+    // If new pokemon already exists in the trainers collection, do not add it
+    if (savedTrainer?.pokemon.find(p => p.id === newPokemon.id)) {
+      return;
+    }
 
     this.localStorage.save({
       username: savedTrainer?.username,
