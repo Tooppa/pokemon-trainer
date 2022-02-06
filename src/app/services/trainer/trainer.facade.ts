@@ -1,5 +1,6 @@
-import { Injectable, OnInit } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { Pokemon } from 'src/app/models/pokemon.model';
 import { Trainer } from 'src/app/models/trainer.model';
 import { TrainerState } from 'src/app/state/trainer.state';
 import { SessionStorageService } from '../session/session-storage.service';
@@ -9,29 +10,18 @@ import { TrainerAPIService } from './trainer-api.service';
 @Injectable({
   providedIn: 'root',
 })
-export class TrainerFacade implements OnInit {
+export class TrainerFacade {
   constructor(
     private readonly trainerApi: TrainerAPIService,
     private readonly trainerState: TrainerState,
-    private readonly sessionStorage: SessionStorageService,
     private readonly localStorage: LocalStorageService
   ) {}
 
-  ngOnInit(): void {
-    // TODO: Investigate if we should do this here
-    // Does this get ran even tho we're not using it?
-    this.fetchTrainers();
-  }
-
-  /**
-   * Must be called first before any other function is called
-   * NOTE: Overrides current sessionStorage
-   */
-  private fetchTrainers(): void {
-    this.trainerApi.getAllTrainers().subscribe((trainers: Trainer[]) => {
-      this.trainerState.setTrainers(trainers);
-      this.sessionStorage.saveSession(trainers);
-    });
+  public loadStoredTrainer(): void {
+    const storedTrainer = this.localStorage.load<Trainer>();
+    if (storedTrainer) {
+      this.trainerState.setTrainer(storedTrainer);
+    }
   }
 
   /**
@@ -40,7 +30,10 @@ export class TrainerFacade implements OnInit {
   public postTrainer(username: string, callback: any): void {
     this.trainerApi.postTrainer(username).subscribe((trainer: Trainer) => {
       this.trainerState.setTrainer(trainer);
-      this.localStorage.save({ username: trainer.username, pokemon: trainer.pokemon});
+      this.localStorage.save({
+        username: trainer.username,
+        pokemon: trainer.pokemon,
+      });
       callback();
     });
   }
@@ -48,25 +41,33 @@ export class TrainerFacade implements OnInit {
   /**
    * Adds new pokemon to user
    */
-  public addNewPokemon(username: string, newPokemon: string[]) {
-    this.trainerApi
-      .addNewPokemon(username, newPokemon)
-      .subscribe((trainer: Trainer) => {
-        this.trainerState.setTrainer(trainer);
-      });
+  public addNewPokemon(newPokemon: Pokemon): void {
+    const savedTrainer = this.localStorage.load<Trainer>();
+
+    // If new pokemon already exists in the trainers collection, do not add it
+    if (savedTrainer?.pokemon.find(p => p.id === newPokemon.id)) {
+      return;
+    }
+
+    this.localStorage.save({
+      username: savedTrainer?.username,
+      pokemon: [...savedTrainer!.pokemon, newPokemon],
+    });
+    this.trainerState.addPokemon([newPokemon]);
+
+    // TODO: Implement when backend PATCH request is fixed
+    // Currently gives 404 error
+    // this.trainerApi
+    //   .addNewPokemon('', [newPokemon])
+    //   .subscribe((trainer: Trainer) => {
+    //     this.trainerState.setTrainer(trainer);
+    //   });
   }
 
   /**
-   * Gets current trainers from the trainer state
+   * Gets current trainer
    */
-  public trainers$(): Observable<Trainer[]> {
-    return this.trainerState.getTrainers$();
-  }
-
-  /**
-   * Gets trainer with usename from the trainer state
-   */
-  public trainer$(username: string): Trainer | undefined {
-    return this.trainerState.getTrainer(username);
+  get currentTrainer(): Observable<Trainer> {
+    return this.trainerState.getTrainer$();
   }
 }

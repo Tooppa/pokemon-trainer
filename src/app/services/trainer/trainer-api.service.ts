@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { Trainer } from '../../models/trainer.model';
 
 import { environment } from 'src/environments/environment';
+import { Pokemon } from 'src/app/models/pokemon.model';
 
 @Injectable({
   providedIn: 'root',
@@ -54,7 +55,7 @@ export class TrainerAPIService {
    * Adds list of pokemon to user
    * @param newPokemon pokemon to add
    */
-  addNewPokemon(username: string, newPokemon: string[]): Observable<Trainer> {
+  addNewPokemon(username: string, newPokemon: Pokemon[]): Observable<Trainer> {
     return this.http.patch<Trainer>(
       `${environment.trainersBaseUrl}/${username}`,
       JSON.stringify({ newPokemon }),

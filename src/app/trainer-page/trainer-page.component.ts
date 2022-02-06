@@ -1,36 +1,31 @@
-import { Component, OnInit } from '@angular/core';
-import { map, Observable } from 'rxjs';
+import { Component } from '@angular/core';
+import { Observable } from 'rxjs';
 import { PokemonDetails } from '../models/pokemon-details.model';
 import { Pokemon } from '../models/pokemon.model';
+import { Trainer } from '../models/trainer.model';
 import { PokemonFacade } from '../services/pokemon/pokemon.facade';
 import { TrainerFacade } from '../services/trainer/trainer.facade';
-import { PokemonState } from '../state/pokemon.state';
 
 @Component({
   selector: 'app-trainer-page',
   templateUrl: './trainer-page.component.html',
   styleUrls: ['./trainer-page.component.scss'],
 })
-export class TrainerPageComponent implements OnInit {
-
+export class TrainerPageComponent {
   constructor(
-    private readonly pokemonService: PokemonFacade,
-    private readonly trainerService: TrainerFacade
+    private readonly pokemonFacade: PokemonFacade,
+    private readonly trainerFacade: TrainerFacade
   ) {}
 
-  get pokemon$(): Observable<Pokemon[]> {
-    return this.pokemonService.pokemon$();
-  }
-
   get currentPokemon(): Pokemon | undefined {
-    return this.pokemonService.currentPokemon;
+    return this.pokemonFacade.currentPokemon;
   }
 
-  get trainer$(): any {
-    return;
+  get currentTrainer$(): Observable<Trainer> {
+    return this.trainerFacade.currentTrainer;
   }
 
-  ngOnInit(): void {
-    this.pokemonService.getPokemon(0, 20);
+  pokemonClick(pokemon: Pokemon): void {
+    this.pokemonFacade.setCurrentPokemon(pokemon);
   }
 }

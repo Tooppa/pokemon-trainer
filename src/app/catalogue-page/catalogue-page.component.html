@@ -9,7 +9,7 @@
     </div>
 </div>
 <div class="catalogue">
-    <app-pokemon-view *ngFor="let pokemon of pokemon$ | async" [pokemon]="pokemon"></app-pokemon-view>
+    <app-pokemon-view *ngFor="let pokemon of pokemon$ | async" [pokemon]="pokemon" (onPokemonClick)="onClickPokemon($event)"></app-pokemon-view>
 </div>
 <div class="settings">
     <div class="buttons">
