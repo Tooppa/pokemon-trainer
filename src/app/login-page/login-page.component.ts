@@ -21,9 +21,10 @@ export class LoginPageComponent implements OnInit {
 
   submit() {
     this.trainerName = this.nameForm.get('trainerName')?.value;
-    this.trainerFacade.postTrainer(this.trainerName, () => {
-      this.router.navigate(['/trainer']);
-    });
+    if (this.trainerName != '')
+      this.trainerFacade.postTrainer(this.trainerName, () => {
+        this.router.navigate(['/trainer']);
+      });
   }
 
 

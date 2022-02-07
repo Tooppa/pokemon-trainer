@@ -34,6 +34,5 @@ export class TrainerPageComponent {
     if (canDelete) { 
       this.trainerFacade.clearPokemon();
     }
-    
   }
 }

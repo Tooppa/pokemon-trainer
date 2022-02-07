@@ -40,6 +40,14 @@
     padding: 20px;
     margin-left: 20px;
 }
+.title{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+.title > h3 {
+    max-width: 400px;
+}
 .additional > div{
     display: flex;
     flex-direction: row;
@@ -60,7 +68,8 @@
     margin: 10px;
     border: #1b2845 2px solid;
     border-radius: 10px;
-    background-color: rgb(255, 59, 59);
+    background-color: #ffcd81;
+    font-weight: 700;
     padding: 20px;
     align-self: center;
 }
