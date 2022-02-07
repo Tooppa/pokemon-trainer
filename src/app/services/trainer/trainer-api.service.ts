@@ -55,9 +55,9 @@ export class TrainerAPIService {
    * Adds list of pokemon to user
    * @param newPokemon pokemon to add
    */
-  addNewPokemon(username: string, newPokemon: Pokemon[]): Observable<Trainer> {
+  addNewPokemon(userId: number, newPokemon: Pokemon[]): Observable<Trainer> {
     return this.http.patch<Trainer>(
-      `${environment.trainersBaseUrl}/${username}`,
+      `${environment.trainersBaseUrl}/${userId}`,
       JSON.stringify({ newPokemon }),
       {
         headers: {

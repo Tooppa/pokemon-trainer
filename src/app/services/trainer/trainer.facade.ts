@@ -1,10 +1,8 @@
-import { HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Pokemon } from 'src/app/models/pokemon.model';
 import { Trainer } from 'src/app/models/trainer.model';
 import { TrainerState } from 'src/app/state/trainer.state';
-import { SessionStorageService } from '../session/session-storage.service';
 import { LocalStorageService } from '../storage/local-storage.service';
 import { TrainerAPIService } from './trainer-api.service';
 
@@ -50,12 +48,11 @@ export class TrainerFacade {
       return;
     }
 
-    // TODO: Implement when backend PATCH request is fixed
-    // Currently gives 404 error
     this.trainerApi
-      .addNewPokemon(savedTrainer!.username, [newPokemon])
+      .addNewPokemon(savedTrainer!.id, [...savedTrainer!.pokemon,newPokemon])
       .subscribe((trainer: Trainer) => {
         this.localStorage.save({
+          id: savedTrainer!.id,
           username: savedTrainer?.username,
           pokemon: [...savedTrainer!.pokemon, newPokemon],
         });
