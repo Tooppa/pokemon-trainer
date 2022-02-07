@@ -62,11 +62,7 @@ export class TrainerFacade {
     this.trainerApi
       .addNewPokemon(savedTrainer!.id, [...savedTrainer!.pokemon, newPokemon])
       .subscribe((trainer: Trainer) => {
-        this.localStorage.save({
-          id: trainer.id,
-          username: trainer.username,
-          pokemon: [...trainer.pokemon, newPokemon],
-        });
+        this.localStorage.save(trainer);
         this.trainerState.addPokemon([newPokemon]);
       });
   }
@@ -79,11 +75,7 @@ export class TrainerFacade {
     this.trainerApi
       .addNewPokemon(savedTrainer!.id, [])
       .subscribe((trainer: Trainer) => {
-        this.localStorage.save({
-          id: trainer.id,
-          username: trainer.username,
-          pokemon: [],
-        });
+        this.localStorage.save(trainer);
         this.trainerState.clearPokemon();
       });
   }
