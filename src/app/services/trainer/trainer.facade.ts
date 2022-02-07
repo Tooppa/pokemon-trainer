@@ -27,11 +27,26 @@ export class TrainerFacade {
    * Posts trainer to trainer database. Also saves it to localStorage
    */
   public postTrainer(username: string, callback: any): void {
-    this.trainerApi.postTrainer(username).subscribe((trainer: Trainer) => {
-      this.trainerState.setTrainer(trainer);
-      this.localStorage.save(trainer);
-      callback();
-    });
+    // First we check if there is an user with that username already in database
+    this.trainerApi
+      .getTrainer(username)
+      .subscribe((foundTrainers: Trainer[]) => {
+        // If we find the user from database, set it as the current user
+        if (foundTrainers.length > 0) {
+          this.trainerState.setTrainer(foundTrainers[0]);
+          this.localStorage.save(foundTrainers[0]);
+          callback();
+        } else {
+          // If not, create a new user
+          this.trainerApi
+            .postTrainer(username)
+            .subscribe((trainer: Trainer) => {
+              this.trainerState.setTrainer(trainer);
+              this.localStorage.save(trainer);
+              callback();
+            });
+        }
+      });
   }
 
   /**
@@ -40,12 +55,12 @@ export class TrainerFacade {
   public addNewPokemon(newPokemon: Pokemon): void {
     // If new pokemon already exists in the trainers collection, do not add it
     const savedTrainer = this.localStorage.load<Trainer>();
-    if (savedTrainer?.pokemon.find(p => p.id === newPokemon.id)) {
+    if (savedTrainer?.pokemon.find((p) => p.id === newPokemon.id)) {
       return;
     }
 
     this.trainerApi
-      .addNewPokemon(savedTrainer!.id, [...savedTrainer!.pokemon,newPokemon])
+      .addNewPokemon(savedTrainer!.id, [...savedTrainer!.pokemon, newPokemon])
       .subscribe((trainer: Trainer) => {
         this.localStorage.save({
           id: trainer.id,
