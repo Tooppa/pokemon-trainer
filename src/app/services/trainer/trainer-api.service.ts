@@ -26,8 +26,8 @@ export class TrainerAPIService {
   /**
    * Gets a trainer with given username
    */
-  getTrainer(username: string): Observable<Trainer> {
-    return this.http.get<Trainer>(
+  getTrainer(username: string): Observable<Trainer[]> {
+    return this.http.get<Trainer[]>(
       `${environment.trainersBaseUrl}?username=${username}`
     );
   }
@@ -55,10 +55,10 @@ export class TrainerAPIService {
    * Adds list of pokemon to user
    * @param newPokemon pokemon to add
    */
-  addNewPokemon(userId: number, newPokemon: Pokemon[]): Observable<Trainer> {
+  addNewPokemon(userId: number, pokemon: Pokemon[]): Observable<Trainer> {
     return this.http.patch<Trainer>(
       `${environment.trainersBaseUrl}/${userId}`,
-      JSON.stringify({ newPokemon }),
+      JSON.stringify({ pokemon: pokemon }),
       {
         headers: {
           'X-API-Key': environment.apiKey,
