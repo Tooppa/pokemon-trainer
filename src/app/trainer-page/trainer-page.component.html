@@ -5,7 +5,7 @@
 </div>
 <div class="collection">
     <div class="catalogue">
-        <div *ngIf="!(currentTrainer$ | async)?.pokemon"><h2>No pokemon collected</h2></div>
+        <div *ngIf="(currentTrainer$ | async)?.pokemon?.length === 0"><h2>No pokemon collected</h2></div>
         <app-pokemon-view *ngFor="let pokemon of (currentTrainer$ | async)?.pokemon" [pokemon]="pokemon" (onPokemonClick)="pokemonClick($event)"></app-pokemon-view>
     </div>
     <div *ngIf="currentPokemon" class="additional">
