@@ -38,9 +38,8 @@ export class TrainerFacade {
    * Adds new pokemon to user
    */
   public addNewPokemon(newPokemon: Pokemon): void {
-    const savedTrainer = this.localStorage.load<Trainer>();
-
     // If new pokemon already exists in the trainers collection, do not add it
+    const savedTrainer = this.localStorage.load<Trainer>();
     if (savedTrainer?.pokemon.find(p => p.id === newPokemon.id)) {
       return;
     }
@@ -49,12 +48,11 @@ export class TrainerFacade {
       .addNewPokemon(savedTrainer!.id, [...savedTrainer!.pokemon,newPokemon])
       .subscribe((trainer: Trainer) => {
         this.localStorage.save({
-          id: savedTrainer!.id,
-          username: savedTrainer?.username,
-          pokemon: [...savedTrainer!.pokemon, newPokemon],
+          id: trainer.id,
+          username: trainer.username,
+          pokemon: [...trainer.pokemon, newPokemon],
         });
         this.trainerState.addPokemon([newPokemon]);
-        this.trainerState.setTrainer(trainer);
       });
   }
 
