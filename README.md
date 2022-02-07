@@ -81,13 +81,23 @@ ng serve
 
 Firstly the app asks you to input your trainer name. This name can be used later to 'log-in' to your previous account. 
 
-If you have already logged in previously, You are redirected immidiately to the trainer page.
+![screenshot-login]
 
-After you have entered your name, you are presented with the trainer page.
+If you have already logged in previously, You are redirected immidiately to the trainer page.
 
 In the trainer page you can view your pokemon collection which starts empty.
 
-From the header you can go to catalogue page where you can see all of the pokemons. By clicking on a pokemon you can add it to your collection.
+![screenshot-trainer]
+
+From the header you can go to catalogue page where you can see all of the pokemons. 
+
+The catalogue consists of 24 pages which each show 48 pokemons. 
+
+You can go trough the pages by using the plus and minus buttons on top and under the red catalogue. 
+
+Also by clicking on a pokemon you can add it to your collection.
+
+![screenshot-catalogue]
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -113,3 +123,6 @@ Mikko Ryynänen
 [linkedin-url-mikko]: https://www.linkedin.com/in/mikko-ryynanen
 [github-url-tomas]: https://github.com/Tooppa
 [github-url-mikko]: https://github.com/mikkoryynanen
+[screenshot-login]: screenshots/login.JPG
+[screenshot-trainer]: screenshots/trainer.JPG
+[screenshot-catalogue]: screenshots/catalogue.JPG
