@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Pokemon } from 'src/app/models/pokemon.model';
@@ -49,19 +50,18 @@ export class TrainerFacade {
       return;
     }
 
-    this.localStorage.save({
-      username: savedTrainer?.username,
-      pokemon: [...savedTrainer!.pokemon, newPokemon],
-    });
-    this.trainerState.addPokemon([newPokemon]);
-
     // TODO: Implement when backend PATCH request is fixed
     // Currently gives 404 error
-    // this.trainerApi
-    //   .addNewPokemon('', [newPokemon])
-    //   .subscribe((trainer: Trainer) => {
-    //     this.trainerState.setTrainer(trainer);
-    //   });
+    this.trainerApi
+      .addNewPokemon(savedTrainer!.username, [newPokemon])
+      .subscribe((trainer: Trainer) => {
+        this.localStorage.save({
+          username: savedTrainer?.username,
+          pokemon: [...savedTrainer!.pokemon, newPokemon],
+        });
+        this.trainerState.addPokemon([newPokemon]);
+        this.trainerState.setTrainer(trainer);
+      });
   }
 
   /**
