@@ -28,4 +28,12 @@ export class TrainerPageComponent {
   pokemonClick(pokemon: Pokemon): void {
     this.pokemonFacade.setCurrentPokemon(pokemon);
   }
+
+  onClearPokemon(): void {
+    const canDelete = confirm('You are about to clear your Pokemon colletion. Are you sure?');
+    if (canDelete) { 
+      this.trainerFacade.clearPokemon();
+    }
+    
+  }
 }
