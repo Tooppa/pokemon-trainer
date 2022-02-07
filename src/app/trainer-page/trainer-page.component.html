@@ -1,4 +1,5 @@
 <h3>Welcome: {{(currentTrainer$ | async)?.username}} Here you can see your pokemon Collection. Click on a pokemon to view more info.</h3>
+<button *ngIf="(currentTrainer$ | async)?.pokemon?.length !== 0" class="btn" (click)="onClearPokemon()">Clear collected Pokemon</button>
 <div class="headers">
     <h1>Collected Pokemons</h1>
     <h1 *ngIf="currentPokemon">Additional info</h1>

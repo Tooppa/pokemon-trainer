@@ -72,6 +72,23 @@ export class TrainerFacade {
   }
 
   /**
+   * Clears all pokemon from user
+   */
+  public clearPokemon(): void {
+    const savedTrainer = this.localStorage.load<Trainer>();
+    this.trainerApi
+      .addNewPokemon(savedTrainer!.id, [])
+      .subscribe((trainer: Trainer) => {
+        this.localStorage.save({
+          id: trainer.id,
+          username: trainer.username,
+          pokemon: [],
+        });
+        this.trainerState.clearPokemon();
+      });
+  }
+
+  /**
    * Gets current trainer
    */
   get currentTrainer(): Observable<Trainer> {

@@ -7,7 +7,7 @@ import { Trainer } from "../models/trainer.model";
   providedIn: 'root',
 })
 export class TrainerState {
-  private readonly trainer$ = new BehaviorSubject<Trainer>(new Trainer);
+  private readonly trainer$ = new BehaviorSubject<Trainer>(new Trainer());
 
   getTrainer$(): Observable<Trainer> {
     return this.trainer$.asObservable();
@@ -25,7 +25,18 @@ export class TrainerState {
     this.setTrainer({
       id: this.trainer$.value.id,
       username: this.trainer$.value.username,
-      pokemon: [...this.trainer$.value.pokemon, ...pokemon]
+      pokemon: [...this.trainer$.value.pokemon, ...pokemon],
+    });
+  }
+
+  /**
+   * Clears all pokemon from current trainer
+   */
+  clearPokemon(): void {
+    this.setTrainer({
+      id: this.trainer$.value.id,
+      username: this.trainer$.value.username,
+      pokemon: [],
     });
   }
 }
