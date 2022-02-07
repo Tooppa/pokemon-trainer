@@ -3,7 +3,6 @@ import { Observable } from 'rxjs';
 import { Pokemon } from 'src/app/models/pokemon.model';
 import { Trainer } from 'src/app/models/trainer.model';
 import { TrainerState } from 'src/app/state/trainer.state';
-import { SessionStorageService } from '../session/session-storage.service';
 import { LocalStorageService } from '../storage/local-storage.service';
 import { TrainerAPIService } from './trainer-api.service';
 
@@ -30,10 +29,7 @@ export class TrainerFacade {
   public postTrainer(username: string, callback: any): void {
     this.trainerApi.postTrainer(username).subscribe((trainer: Trainer) => {
       this.trainerState.setTrainer(trainer);
-      this.localStorage.save({
-        username: trainer.username,
-        pokemon: trainer.pokemon,
-      });
+      this.localStorage.save(trainer);
       callback();
     });
   }
@@ -49,19 +45,17 @@ export class TrainerFacade {
       return;
     }
 
-    this.localStorage.save({
-      username: savedTrainer?.username,
-      pokemon: [...savedTrainer!.pokemon, newPokemon],
-    });
-    this.trainerState.addPokemon([newPokemon]);
-
-    // TODO: Implement when backend PATCH request is fixed
-    // Currently gives 404 error
-    // this.trainerApi
-    //   .addNewPokemon('', [newPokemon])
-    //   .subscribe((trainer: Trainer) => {
-    //     this.trainerState.setTrainer(trainer);
-    //   });
+    this.trainerApi
+      .addNewPokemon(savedTrainer!.id, [...savedTrainer!.pokemon,newPokemon])
+      .subscribe((trainer: Trainer) => {
+        this.localStorage.save({
+          id: savedTrainer!.id,
+          username: savedTrainer?.username,
+          pokemon: [...savedTrainer!.pokemon, newPokemon],
+        });
+        this.trainerState.addPokemon([newPokemon]);
+        this.trainerState.setTrainer(trainer);
+      });
   }
 
   /**
