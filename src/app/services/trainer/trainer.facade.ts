@@ -30,10 +30,7 @@ export class TrainerFacade {
   public postTrainer(username: string, callback: any): void {
     this.trainerApi.postTrainer(username).subscribe((trainer: Trainer) => {
       this.trainerState.setTrainer(trainer);
-      this.localStorage.save({
-        username: trainer.username,
-        pokemon: trainer.pokemon,
-      });
+      this.localStorage.save(trainer);
       callback();
     });
   }
